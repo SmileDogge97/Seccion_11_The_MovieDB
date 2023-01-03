@@ -1,5 +1,10 @@
 package com.example.offlinemovies.data;
 
+import androidx.room.Room;
+
+import com.example.offlinemovies.app.MyApp;
+import com.example.offlinemovies.data.local.MovieRoomDatabase;
+import com.example.offlinemovies.data.local.dao.MovieDao;
 import com.example.offlinemovies.data.remote.ApiConstants;
 import com.example.offlinemovies.data.remote.MovieApiService;
 import com.example.offlinemovies.data.remote.RequestInterceptor;
@@ -10,8 +15,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MovieRepository {
     private final MovieApiService movieApiService;
+    private final MovieDao movieDao;
 
     public MovieRepository(){
+        //Local > ROOM
+        MovieRoomDatabase movieRoomDatabase = Room.databaseBuilder(
+                MyApp.getContext(),
+                MovieRoomDatabase.class,
+                "db_movies"
+        ).build();
+        movieDao = movieRoomDatabase.getMovieDao();
+
         //RequestInterceptor: incluir en la cabecera (URL)de la
         // petición el TOKEN o API_KEY que autoriza al usuario
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();

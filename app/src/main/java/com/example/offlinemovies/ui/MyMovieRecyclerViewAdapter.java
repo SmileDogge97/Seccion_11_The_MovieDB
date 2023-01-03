@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.offlinemovies.data.local.MovieEntity;
+import com.example.offlinemovies.data.local.entity.MovieEntity;
 import com.example.offlinemovies.data.remote.ApiConstants;
 import com.example.offlinemovies.databinding.FragmentItemBinding;
 
